@@ -1,3 +1,5 @@
+#Esse código deve ser adicionado ao código da AlexNet
+
 import os
 import data_utils as du
 
