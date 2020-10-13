@@ -5,7 +5,7 @@ def load_data(dirname="17flowers", resize_pics=(224, 224), shuffle=True,
     one_hot=False):
     dataset_file = os.path.join("/dataset/17flowers", '17flowers.pkl')
     if not os.path.exists(dataset_file):
-        dirname = '/scratch/40071a/dbpina/keras-prov/Experimentos/17flowers'
+        dirname = '/dataset/17flowers'
         tarpath = maybe_download("17flowers.tgz",
                                  "http://www.robots.ox.ac.uk/~vgg/data/flowers/17/",dirname)
     X, Y = du.build_image_dataset_from_dir(os.path.join(dirname, 'jpg/'),
