@@ -1,6 +1,10 @@
 import data_utils as du
 import os
 
+from six.moves import urllib #added
+import sys #added
+import tarfile #added
+
 import keras
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Dropout, Flatten,\
