@@ -5,12 +5,12 @@ from six.moves import urllib #added
 import sys #added
 import tarfile #added
 
-import keras
-from keras.models import Sequential
-from keras.layers import Dense, Activation, Dropout, Flatten,\
- Conv2D, MaxPooling2D
-from keras.layers.normalization import BatchNormalization
+from tensorflow import keras
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Activation, Dropout, Flatten,Conv2D, MaxPooling2D
+from tensorflow.keras.layers import BatchNormalization
 import numpy as np
+
 np.random.seed(1000)
 
 def maybe_download(filename, source_url, work_directory):
@@ -67,9 +67,9 @@ def untar(fname, extract_dir):
 
 def load_data(dirname="17flowers", resize_pics=(224, 224), shuffle=True,
     one_hot=False):
-    dataset_file = os.path.join("/17flowers", '17flowers.pkl')
+    dataset_file = os.path.join("17flowers", '17flowers.pkl')
     #if not os.path.exists(dataset_file):
-    dirname = '/17flowers'
+    dirname = '17flowers'
     tarpath = maybe_download("17flowers.tgz",
                                  "http://www.robots.ox.ac.uk/~vgg/data/flowers/17/",dirname)
     X, Y = du.build_image_dataset_from_dir(os.path.join(dirname, 'jpg/'),
@@ -162,6 +162,12 @@ model.compile(loss='categorical_crossentropy', optimizer='adam',\
  metrics=['accuracy'])
 
 #model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+y_tmp = np.zeros((x.shape[0], 17))
+
+for i in range(0, x.shape[0]):
+  y_tmp[i][y[i]] = 1
+y = y_tmp
 
 # (5) Train
 model.fit(x, y, batch_size=64, epochs=1, verbose=1, \
